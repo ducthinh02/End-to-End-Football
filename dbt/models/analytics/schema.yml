@@ -1,0 +1,169 @@
+version: 2
+
+models:
+  - name: fact_team_performance
+    description: "Bảng fact thống kê dữ liệu theo đội bóng"
+    columns:
+      - name: season_id
+        description: "FK của dim_season"
+        data_tests:
+          - not_null
+
+      - name: competition_id
+        description: "FK của dim_competition"
+        data_tests:
+          - not_null
+
+      - name: team_id
+        description: "FK của dim_team"
+        data_tests:
+          - not_null
+
+      - name: position
+        description: "Vị trí của đội bóng ở BXH của giải đấu"
+
+      - name: form
+        description: "Phong độ của đội bóng"
+
+      - name: won
+        description: "Số trận thắng của đội bóng"
+
+      - name: draw
+        description: "Số trận hoà của đội bóng"
+
+      - name: lost
+        description: "Số trận thua của đội bóng"
+
+      - name: points
+        description: "Số điểm dành được"
+
+      - name: goalsfor
+        description: "Số bàn thắng của đội bóng"
+
+      - name: goalsagainst
+        description: "Số bàn thua của đội bóng"
+
+      - name: goaldifference
+        description: "Hiệu số của đội bóng"
+
+      - name: champion_name
+        description: "Đội vô địch của giải đấu"
+
+
+  - name: dim_competition
+    description: "Bảng dim của giải đấu"
+    columns:
+      - name: competition_id
+        description: "PK của dim_competition"
+        data_tests:
+          - not_null
+
+      - name: name_of_competition
+        description: "Tên của giải đấu"
+        data_tests:
+          - not_null
+
+      - name: code_of_competition
+        description: "Mã tên của giải đấu"
+        data_tests:
+          - not_null
+
+      - name: TYPE_OF_COMPETITION
+        description: "Thể loại giải đấu"
+
+
+
+  - name: dim_season
+    description: "Bảng dim của mùa giải"
+    columns:
+      - name: season_id
+        description: "PK của dim_season"
+        data_tests:
+          - not_null
+
+      - name: start_date
+        description: "Ngày bắt đầu của giải đấu"
+
+      - name: end_date
+        description: "Ngày kết thúc của giải đấu"
+
+
+  - name: dim_team
+    description: "Bảng dim của đội bóng"
+    columns:
+      - name: team_id
+        description: "PK của dim_team"
+        data_tests:
+          - not_null
+
+      - name: Name_of_team
+        description: "Tên của đội bóng"
+        data_tests:
+          - not_null
+
+      - name: TLA
+        description: "Mã tên của đội bóng"
+      - name: area_name
+        description: "Tên khu vực của đội bóng"
+        data_tests:
+          - not_null
+
+      - name: founded_year
+        description: "Năm thành lập của đội bóng"
+
+
+
+  - name: fact_matches_team
+    description: "Bảng Fact lưu trữ thông tin chi tiết các trận đấu bóng đá và chỉ số phân tích."
+    columns:
+      - name: match_id
+        description: "ID duy nhất của trận đấu"
+        tests:
+          - unique
+          - not_null
+
+      - name: total_goals
+        description: "Tổng số bàn thắng của cả 2 đội trong trận"
+        tests:
+          - not_null
+
+      - name: match_narrative
+        description: "Diễn biến/Kịch bản trận đấu (Lội ngược dòng, Giữ thế trận...)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Home Comeback', 'Away Comeback', 'Home Bottled', 'Away Bottled', 'Standard']
+                quote: true
+      - name: is_over_2_5
+        description: "Trận đấu có trên 2.5 bàn thắng hay không"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Over 2.5', 'Under 2.5']
+
+      - name: higher_scoring_half
+        description: "Hiệp thi đấu có nhiều bàn thắng hơn"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['1st Half', '2nd Half', 'Equal']
+
+      - name: is_home_clean_sheet
+        description: "Cờ báo Đội nhà giữ sạch lưới (1: Có, 0: Không)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: is_away_clean_sheet
+        description: "Cờ báo Đội khách giữ sạch lưới (1: Có, 0: Không)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false

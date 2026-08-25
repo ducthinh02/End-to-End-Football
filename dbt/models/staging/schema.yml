@@ -1,0 +1,98 @@
+version: 2
+
+models:
+      - name: stg_areas
+        description: "Bảng staging về khu vực"
+        columns:
+          - name: area_id
+            data_tests:
+              - unique
+              - not_null
+      
+      - name: stg_competition
+        description: "Bảng staging về giải đấu"
+        columns:
+          - name: competition_id
+            data_tests:
+              - unique
+              - not_null
+      
+      - name: stg_matches
+        description: "Bảng dữ liệu về khu vực"
+        columns:
+          - name: match_id
+            data_tests:
+              - unique
+              - not_null
+          - name: season_id
+            data_tests:
+              - not_null
+          - name: competition_id
+            data_tests: 
+              - not_null
+
+      - name: stg_player
+        description: "Bảng dữ liệu về khu vực"
+        columns:
+          - name: player_id
+            data_tests:
+              - unique
+              - not_null
+
+      - name: stg_season
+        description: "Bảng dữ liệu về khu vực"
+        columns:
+          - name: season_id
+            data_tests:
+              - unique
+              - not_null
+
+      - name: stg_standing
+        description: "Bảng dữ liệu về khu vực"
+        columns:
+          - name: season_id
+            data_tests:
+              - not_null
+          - name: competition_id
+            data_tests:
+              - not_null
+          - name: team_id
+            data_tests:
+              - not_null
+
+      - name: stg_team_competition
+        description: "Bảng dữ liệu về khu vực"
+        columns:
+          - name: season_id
+            data_tests:
+              - not_null
+          - name: competition_id
+            data_tests: 
+              - not_null
+          - name: team_id
+            data_tests:
+              - not_null
+
+      - name: stg_teams
+        description: "Bảng dữ liệu về khu vực"
+        columns:
+          - name: team_id
+            data_tests:
+              - unique
+              - not_null
+
+      - name: stg_top_scorers
+        description: "Bảng dữ liệu về khu vực" 
+        columns:
+          - name: season_id
+            data_tests:
+              - not_null
+          - name: competition_id
+            data_tests: 
+              - not_null
+          - name: team_id
+            data_tests:
+              - not_null
+          - name: player_id
+            data_tests:
+              - not_null

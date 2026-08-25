@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: int_team_performance
+    description: "Bảng tổng hợp giữa standing, competition, team, season"
+    columns:    
+      - name: season_id
+        description: "ID của mùa giải"
+        data_tests:
+          - not_null
+
+      - name: competition_id
+        description: "ID của giải đấu"
+        data_tests:
+          - not_null
+
+      - name: team_id
+        description: "ID của đội bóng"
+        data_tests:
+          - not_null
+
+      - name: position
+        description: "Vị trí của đội bóng ở BXH của giải đấu"
+
+      - name: points
+        description: "Số điểm dành được"
+
+      - name: champion_name
+        description: "Đội vô địch của giải đấu"
+
+  

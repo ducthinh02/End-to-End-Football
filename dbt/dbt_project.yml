@@ -1,0 +1,40 @@
+name: 'football_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+profile: elt_profile
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "targets"
+  - "dbt_packages"
+
+vars:
+  start_date:
+  is_backfill: false
+
+models:
+  football_dbt_project:
+
+    staging:
+      +meta:
+        materialized: view
+        schema: staging
+
+    analytics:
+      +meta:
+        materialized: view
+        schema: analytics
+
+    intermediate:
+      +meta:
+        materialized: view
+        schema: intermediate
+flags:
+  require_generic_test_arguments_property: true

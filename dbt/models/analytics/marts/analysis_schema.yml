@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  
+    - name: team_performance_analysis
+      columns:
+        - name: season_id
+          data_tests:
+            - not_null
+
+        - name: competition_id
+          data_tests:
+            - not_null
+
+        - name: team_id
+          data_tests:
+            - not_null
+      
+
+
+    - name: matches_team_analysis
+      columns:
+          - name: match_id
+            data_tests:
+              - not_null
+              - unique
+
+          - name: season_id
+            data_tests:
+              - not_null
+
+          - name: competition_id
+            data_tests:
+              - not_null
+
+          - name: home_team_id
+            data_tests:
+              - not_null
+          
+          - name: name_home_team
+            description: "Tên đội nhà"
+            data_tests:
+              - not_null
+
+          - name: away_team_id
+            data_tests:
+              - not_null
+          
+          - name: name_away_team
+            description: "Tên đội khách"
+            data_tests:
+              - not_null
